@@ -14,6 +14,10 @@
   "scripts": {},
   "author": "Matthew Brisebois",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjbrisebois/identicons-js"
+  },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
     "@whi/weblogger": "^0.1.5"
