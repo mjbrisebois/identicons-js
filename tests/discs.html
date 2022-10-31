@@ -1,0 +1,96 @@
+<style type="text/css">
+.identicon {
+  width: 100px;
+  height: 100px;
+}
+img {
+  border-radius: 50%;
+}
+</style>
+
+<div>
+    <canvas class="identicon" base="0.0" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.1" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.2" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.3" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.4" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.5" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.6" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.7" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.8" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="0.9" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" base="1.0" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+</div>
+<div>
+    <canvas class="identicon" seed="hello world"></canvas>
+    <canvas class="identicon" seed="Hello, World!"></canvas>
+    <canvas class="identicon" seed="48695b12decfaed3a99a79ab06f13b4d0c22b39a"></canvas>
+    <canvas class="identicon" seed="uhCEkms-1__XHNNs9JM-3FhoYSFGBxlSROIddqpjlTbhNWzSwB0V6"></canvas>
+    <canvas class="identicon" seed="2f7cca0b39170cb0bc12c185318e892db2dd7a0d"></canvas>
+    <canvas class="identicon" seed="e41b70c00edac867ba508fe3fc678fcedd9a08c0"></canvas>
+    <canvas class="identicon" seed="5a7edabb24bc0dc1a304b038e35c01d235902e81"></canvas>
+    <canvas class="identicon" seed="234de0fed6743a4a0838dd8a95012f01cd888b93"></canvas>
+    <canvas class="identicon" seed="f9d5162d7ce8009b8cba69fc053be3e0c2c55605"></canvas>
+    <canvas class="identicon" seed="6a800fab55cfe9795453489aaa31465e6880eec7"></canvas>
+    <canvas class="identicon" seed="48695b12decfaed3a99a79ab06f13b4d0c22b39a"></canvas>
+</div>
+<div>
+    <canvas class="identicon" base="0.0"></canvas>
+    <canvas class="identicon" base="0.15"></canvas>
+    <canvas class="identicon" base="0.3"></canvas>
+    <canvas class="identicon" base="0.45"></canvas>
+    <canvas class="identicon" base="0.6"></canvas>
+    <canvas class="identicon" base="0.75"></canvas>
+    <canvas class="identicon" base="0.9"></canvas>
+    <canvas class="identicon" base="1.0"></canvas>
+</div>
+
+<script type="text/javascript" src="../dist/identicons.bundled.js"></script>
+<script type="text/javascript">
+    null;
+
+  const identicons		= document.querySelectorAll(".identicon");
+  const discSettings		= {
+      "colorRange": 20,
+      // "minDiscs": 6,
+      // "maxDiscs": 9,
+  };
+
+  identicons.forEach( canvas => {
+      const backdrop		= document.createElement("canvas");
+      backdrop.style.display	= "block";
+
+      {
+	  const result		= Identicons.renderDiscs({
+	      "seed": canvas.attributes.seed?.value,
+	      "base": canvas.attributes.base?.value,
+	      "width": 1600,
+	      "height": 200,
+	      ...discSettings,
+	  }, backdrop );
+
+	  const pre		= document.createElement("pre");
+	  pre.innerText		= JSON.stringify( result, null, 4 );
+
+	  canvas.after( backdrop, pre );
+	  canvas.setAttribute("seed", result.settings.seed );
+      }
+
+      {
+	  const result		= Identicons.renderDiscs({
+	      "seed": canvas.attributes.seed?.value,
+	      "base": canvas.attributes.base?.value,
+	      ...discSettings,
+	  }, canvas );
+
+	  const pre		= document.createElement("pre");
+	  pre.innerText		= JSON.stringify( result, null, 4 );
+
+	  const img		= document.createElement("img");
+	  img.src		= canvas.toDataURL();
+
+	  canvas.after( img, pre );
+      }
+  });
+
+</script>

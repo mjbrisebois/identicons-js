@@ -1,0 +1,30 @@
+{
+  "name": "@whi/identicons",
+  "version": "0.1.0",
+  "description": "A javascript library for generating identicon images based on an input seed",
+  "main": "src/index.js",
+  "browser": "dist/identicons.bundled.js",
+  "files": [
+    "README.md",
+    "src/index.js",
+    "src/pseudorandom.js",
+    "dist/identicons.bundled.js",
+    "dist/identicons.bundled.js.map"
+  ],
+  "scripts": {},
+  "author": "Matthew Brisebois",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.19.0",
+    "@whi/weblogger": "^0.1.5"
+  },
+  "devDependencies": {
+    "@whi/json": "^0.1.6",
+    "@whi/stdlog": "^0.3.4",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "puppeteer": "^18.0.5",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
