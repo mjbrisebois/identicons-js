@@ -62,6 +62,36 @@ function basic_tests () {
 
 	expect( dataURL			).to.have.string("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs");
     });
+
+    it("should make grayscale version", async function () {
+	const url			= "file://" + __filename.split("/").slice(0,-2).join("/") + "/discs.html";
+
+	await page.goto( url );
+
+	await page.evaluate(async ( level ) => {
+	    Identicons.logging( level );
+	}, LOG_LEVEL );
+
+	log.normal("Create identicon");
+	const [ color, nocolor ]	= await page.evaluate(async () => {
+	    const color			= Identicons.renderDiscs({
+		"seed": "hello world",
+		"size": 10,
+	    });
+	    const nocolor		= Identicons.renderDiscs({
+		"seed": "hello world",
+		"size": 10,
+		"grayscale": true,
+	    });
+
+	    return [ color.settings, nocolor.settings ];
+	});
+
+	delete color.background_color;
+	delete nocolor.background_color;
+
+	expect( color			).to.deep.equal( nocolor );
+    });
 }
 
 describe("Integration", () => {

@@ -13,11 +13,15 @@ function createColor ( base, range, prng, grayscale ) {
     const radius		= range * 3.6 / 2;
     const h			= (prng.randint( (base * 360) - radius, (base * 360) + radius ) + 360) % 361; // (Math.floor( (base * 360) + (rand() * 90) )) % 361;
     // saturation goes from 40 to 100, it avoids greyish colors
-    const s			= grayscale ? 0 : prng.randint( 85, 100 ); // (base * 360) - 45
+    const s			= prng.randint( 85, 100 ); // (base * 360) - 45
     // lightness can be anything from 0 to 100, but probabilities are a bell curve around 50%
     const l			= prng.randint( 20, 80 ); // ((rand() + rand() + rand() + rand()) * 15) + 20;
 
-    return {h, s, l}
+    return {
+	h,
+	"s": grayscale ? 0 : s,
+	l,
+    };
 }
 
 const ellipse			= new Path2D();
@@ -87,6 +91,7 @@ function renderDiscs( opts, canvas ) {
     const numDiscs		= prng.randint( minDiscs, maxDiscs );
     const discMulti		= [];
     const discSizes		= [];
+    const discPositions		= [];
 
     for (let i = 0; i < numDiscs; i++) {
 	const multiplier	= ((i+1)/numDiscs) ** 2;
@@ -110,6 +115,8 @@ function renderDiscs( opts, canvas ) {
 	const [ x, y ]		= randomPointInEllipse( prng, ctx );
 	const x_center		= (x * (width  + radius/2)) - radius/4;
 	const y_center		= (y * (height + radius/2)) - radius/4;
+
+	discPositions.push([x,y]);
 
 	log.debug("Valid ellipse point( %s, %s )", x_center, y_center );
 
@@ -143,6 +150,7 @@ function renderDiscs( opts, canvas ) {
 	    background_color,
 	    discMulti,
 	    discSizes,
+	    discPositions,
 	},
     };
 }

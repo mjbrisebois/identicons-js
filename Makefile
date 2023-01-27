@@ -19,9 +19,9 @@ test-debug:		test-unit-debug
 build-watch:
 	OUTPUT=$(DIST_NAME) npx webpack --watch
 
-test-unit:
+test-unit:		build
 	npx mocha --recursive ./tests/unit
-test-unit-debug:
+test-unit-debug:	build
 	LOG_LEVEL=silly npx mocha --recursive ./tests/unit
 test-integration:		build
 	npx mocha --recursive ./tests/integration
