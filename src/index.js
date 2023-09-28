@@ -1,5 +1,5 @@
 const { Logger }			= require('@whi/weblogger');
-const log				= new Logger("identicons");
+const log				= new Logger("identicons", ((import.meta.url === import.meta.main) && process.env.LOG_LEVEL) || "fatal" );
 
 const { Pseudorandomizer }		= require('./pseudorandom.js');
 
